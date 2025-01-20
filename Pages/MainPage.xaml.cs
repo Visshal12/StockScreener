@@ -1,4 +1,4 @@
-﻿namespace StockScreener
+﻿namespace StockScreener.Pages
 {
     public partial class MainPage : ContentPage
     {
