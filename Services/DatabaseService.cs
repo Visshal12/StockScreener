@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using StockScreener.Models1;
+using System.Threading.Tasks;
 
-namespace YourNamespace
+
+namespace StockScreener.Services
 {
     public class DatabaseService
     {
@@ -14,6 +17,7 @@ namespace YourNamespace
             string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "MyApp.db");
             _database = new SQLiteConnection(dbPath);
             _database.CreateTable<MyDataModel>();
+            _database.CreateTable<Stock>();
         }
 
         // Method to retrieve all items from the database
@@ -38,6 +42,16 @@ namespace YourNamespace
         public int UpdateItem(MyDataModel item)
         {
             return _database.Update(item);
+        }
+
+        public List<Stock> GetStocks()
+        {
+            return _database.Table<Stock>().ToList();
+        }
+
+        public int SaveStock(Stock stock)
+        {
+            return _database.Insert(stock);
         }
     }
 
